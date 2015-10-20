@@ -12,3 +12,6 @@
 #### Guest access
 	Access to shared catalogs without signing in
 #### User actions logging
+
+# Database Schema
+![DbSchema](./DbSchema/schema.png)
