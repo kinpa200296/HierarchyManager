@@ -1,4 +1,4 @@
-#!/usr/bin/python3.2
+#!/usr/bin/python2.7
  
 import sys
 from PyQt4 import QtGui, QtCore, QtSql
@@ -10,9 +10,14 @@ class MySQLQueryModel(QtSql.QSqlQueryModel):
         QtSql.QSqlQueryModel.__init__(self)
         
     def data (self, index, role):
-        if index.isValid() and role==QtCore.Qt.DecorationRole:
-            index = QtSql.QSqlQueryModel.data(self, index, role)
-            icon = QtGui.QIcon("folder.png")
+        if index.isValid() and role==QtCore.Qt.DisplayRole:
+            return self.record(index.internalId()).value(2).toString()
+        elif index.isValid() and role==QtCore.Qt.DecorationRole:
+            type = self.record(index.internalId()).value(0).toInt()[0]
+            if type==1:
+                icon = QtGui.QIcon("folder.png")
+            else:
+                icon = QtGui.QIcon("file.png")
             return icon
         else:
             return QtSql.QSqlQueryModel.data(self, index, role)
@@ -30,7 +35,7 @@ class FolderView(QtGui.QDialog):
         
         view = QtGui.QListView(self)
         view.setModel(self.model)
-        view.setModelColumn(1)
+        #view.setModelColumn(2)
         view.setSpacing(10)
         view.setViewMode(QtGui.QListView.IconMode)
         view.doubleClicked.connect(self.doubleClicked)
@@ -53,14 +58,20 @@ class FolderView(QtGui.QDialog):
         
     def execQuery(self):
         if self.folder>0:
-            query = QtSql.QSqlQuery("select NodeID, NodeName\
+            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
                 from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
-                where Nodes.UserID=? and Edges.ParentID=?")
+                where Nodes.UserID=? and Edges.ParentID=?\
+                \
+                union\
+                \
+                select 2 as Type, Files.FileID as ID, Files.Name as Name\
+                from Files left join NodeFiles on NodeFiles.FileID=Files.FileID\
+                where NodeFiles.NodeID=?;")
             query.bindValue(0, self.UserID);
             query.bindValue(1, self.folder);
-            query.exec_()
+            query.bindValue(2, self.folder);
         else:
-            query = QtSql.QSqlQuery("select NodeID, NodeName\
+            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
                 from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
                 where Nodes.UserID=? and Edges.ParentID is NULL")
             query.bindValue(0, self.UserID);
@@ -69,12 +80,13 @@ class FolderView(QtGui.QDialog):
         return query;
     
     def doubleClicked(self, index):
-        self.folder = self.model.record(index.internalId()).value(0).toInt()[0]
-        folder = QtGui.QListWidgetItem(self.model.record(index.internalId()).value(1).toString()+" >")
-        folder.setData(DBFolderIDRole,self.folder)
-        self.history.addItem(folder)
-        self.history.setCurrentItem(self.history.item(self.history.count()-1))
-        self.model.setQuery(self.execQuery())
+        if self.model.record(index.internalId()).value(0).toInt()[0]==1:
+            self.folder = self.model.record(index.internalId()).value(1).toInt()[0]
+            folder = QtGui.QListWidgetItem(self.model.record(index.internalId()).value(2).toString()+" >")
+            folder.setData(DBFolderIDRole,self.folder)
+            self.history.addItem(folder)
+            self.history.setCurrentItem(self.history.item(self.history.count()-1))
+            self.model.setQuery(self.execQuery())
         
     def selectFolder(self, item):
         self.folder = item.data(DBFolderIDRole).toInt()[0]
