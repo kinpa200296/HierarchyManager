@@ -11,13 +11,16 @@ class MySQLQueryModel(QtSql.QSqlQueryModel):
         
     def data (self, index, role):
         if index.isValid() and role==QtCore.Qt.DisplayRole:
-            return self.record(index.internalId()).value(2).toString()
+            return self.record(index.row()).value(2).toString()
         elif index.isValid() and role==QtCore.Qt.DecorationRole:
-            type = self.record(index.internalId()).value(0).toInt()[0]
+            type = self.record(index.row()).value(0).toInt()[0]
             if type==1:
                 icon = QtGui.QIcon("folder.png")
             else:
-                icon = QtGui.QIcon("file.png")
+                s = self.record(index.row()).value(3).toString()
+                if s=="":
+                    s = "file.png"
+                icon = QtGui.QIcon(s)
             return icon
         else:
             return QtSql.QSqlQueryModel.data(self, index, role)
@@ -58,14 +61,15 @@ class FolderView(QtGui.QDialog):
         
     def execQuery(self):
         if self.folder>0:
-            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
+            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name, NULL as Icon\
                 from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
                 where Nodes.UserID=? and Edges.ParentID=?\
                 \
                 union\
                 \
-                select 2 as Type, Files.FileID as ID, Files.Name as Name\
+                select 2 as Type, Files.FileID as ID, Files.Name as Name, FileExtensions.Icon as Icon\
                 from Files left join NodeFiles on NodeFiles.FileID=Files.FileID\
+                left join FileExtensions on Files.ExtensionID=FileExtensions.ExtensionID\
                 where NodeFiles.NodeID=?;")
             query.bindValue(0, self.UserID);
             query.bindValue(1, self.folder);
@@ -80,9 +84,9 @@ class FolderView(QtGui.QDialog):
         return query;
     
     def doubleClicked(self, index):
-        if self.model.record(index.internalId()).value(0).toInt()[0]==1:
-            self.folder = self.model.record(index.internalId()).value(1).toInt()[0]
-            folder = QtGui.QListWidgetItem(self.model.record(index.internalId()).value(2).toString()+" >")
+        if self.model.record(index.row()).value(0).toInt()[0]==1:
+            self.folder = self.model.record(index.row()).value(1).toInt()[0]
+            folder = QtGui.QListWidgetItem(self.model.record(index.row()).value(2).toString()+" >")
             folder.setData(DBFolderIDRole,self.folder)
             self.history.addItem(folder)
             self.history.setCurrentItem(self.history.item(self.history.count()-1))
