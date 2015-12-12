@@ -1,10 +1,11 @@
 #!/usr/bin/python2.7
 
-from PyQt4 import QtGui, QtCore, QtSql
+from PyQt4 import QtGui, QtCore, QtSql, uic
 from FolderModel import *
 from FolderProperties import *
+from FileProperties import *
 DBFolderIDRole = QtCore.Qt.UserRole
- 
+
 class FolderView(QtGui.QDialog):
     def __init__(self, UserID, parent):
         QtGui.QDialog.__init__(self)
@@ -165,14 +166,18 @@ class FolderView(QtGui.QDialog):
     
     def AddFileContextMenu(self, point):
         self.fileAddMenu = QtGui.QMenu()
-        self.fileAddMenu.addAction("Add folder", self.folderProperties)
-        self.fileAddMenu.addAction("Add file")
+        self.fileAddMenu.addAction("Add folder", self.folderAdd)
+        self.fileAddMenu.addAction("Add file", self.fileAdd)
         if len(self.View.selectedIndexes())>0:
             self.fileAddMenu.addAction("Copy")
         if self.copy!=None:
             self.fileAddMenu.addAction("Paste")
         self.fileAddMenu.popup(self.pos() + point)
     
-    def folderProperties(self):
-        self.FP = FolderProperties(self, self.folder, self.UserID)    
+    def folderAdd(self):
+        self.FP = FolderProperties(self, self.folder, self.UserID)
+        self.FP.open()
+    
+    def fileAdd(self):
+        self.FP = FileProperties(self, self.folder)
         self.FP.open()
