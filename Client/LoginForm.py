@@ -3,6 +3,7 @@
 import sys
 from PyQt4 import QtGui, QtCore, QtSql
 from FolderView import *
+from DbConfig import DbConfig
 
  
 class LoginForm(QtGui.QDialog):
@@ -10,11 +11,11 @@ class LoginForm(QtGui.QDialog):
         QtGui.QDialog.__init__(self)
         
         self.setWindowTitle("Hierarchy Manager")
-        
+
         db = QtSql.QSqlDatabase.addDatabase("QMYSQL")
-        db.setHostName("localhost");
-        db.setDatabaseName("hierarchymanager");
-        db.setUserName("root")
+        config = DbConfig()
+        config.load()
+        config.config(db)
         ok = db.open()
         
         if not ok:
