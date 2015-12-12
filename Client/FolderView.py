@@ -36,8 +36,9 @@ class FolderView(QtGui.QDialog):
         self.Shared = QtGui.QLabel("Rating:")
         CommentLabel = QtGui.QLabel("Comments")
         
+        self.FileID = 0
         self.CommentsModel = QtSql.QSqlQueryModel()
-        self.CommentsModel.setQuery(self.commentQuery(0))
+        self.CommentsModel.setQuery(self.commentQuery())
         self.Comments = QtGui.QListView()
         self.Comments.setModel(self.CommentsModel)
         self.Comments.setModelColumn(2)
@@ -52,12 +53,21 @@ class FolderView(QtGui.QDialog):
         box.addWidget(view)
         main.addLayout(box)
         
+        self.myComment = QtGui.QLineEdit(self)
+        SubmitComment = QtGui.QPushButton("Submit")
+        self.connect(SubmitComment, QtCore.SIGNAL("clicked()"), self.createComment)
+        
+        input = QtGui.QHBoxLayout()
+        input.addWidget(self.myComment)
+        input.addWidget(SubmitComment)
+        
         box = QtGui.QVBoxLayout()
         box.addWidget(self.FileName)
         box.addWidget(self.Rating)
         box.addWidget(self.Shared)
         box.addWidget(CommentLabel)
         box.addWidget(self.Comments)
+        box.addLayout(input)
         self.frame = QtGui.QFrame()
         self.frame.setLayout(box)
         self.frame.setVisible(False)
@@ -92,13 +102,23 @@ class FolderView(QtGui.QDialog):
         query.exec_()
         return query;
     
-    def commentQuery(self, fileID):
+    def createComment(self):
+        query = QtSql.QSqlQuery("INSERT INTO Comments(UserID, FileID, CommentText)\
+                                VALUES (?, ?, ?);")
+        query.bindValue(0, self.UserID)
+        query.bindValue(1, self.FileID)
+        query.bindValue(2, self.myComment.text())
+        if query.exec_():
+            self.myComment.setText("")
+            self.CommentsModel.setQuery(self.commentQuery())
+    
+    def commentQuery(self):
         query = QtSql.QSqlQuery("select Comments.commentID, Users.LoginWord, Comments.CommentText\
                                 from Comments\
                                 left join Users on Comments.UserID=Users.UserID\
                                 where Comments.FileID=?;")
                                 
-        query.bindValue(0, fileID);
+        query.bindValue(0, self.FileID);
         query.exec_()
         return query
     
@@ -120,12 +140,11 @@ class FolderView(QtGui.QDialog):
             self.history.setCurrentItem(self.history.item(self.history.count()-1))
             self.model.setQuery(self.execQuery())
         else:
-            fileID = self.model.record(index.row()).value(1).toInt()[0]
+            self.FileID = self.model.record(index.row()).value(1).toInt()[0]
             self.FileName.setText("File: " + self.model.record(index.row()).value(2).toString())
             self.Rating.setText("Rating: " + self.ratingStr(self.model.record(index.row()).value(4).toInt()[0]))
             self.Shared.setText("Shared: " + str(self.model.record(index.row()).value(5).toInt()[0]>0))
-            print self.model.record(index.row()).value(4).toInt()[0]
-            self.CommentsModel.setQuery(self.commentQuery(fileID))
+            self.CommentsModel.setQuery(self.commentQuery())
             self.frame.setVisible(True)
         
     def selectFolder(self, item):
