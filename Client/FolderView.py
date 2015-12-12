@@ -1,9 +1,11 @@
 #!/usr/bin/python2.7
 
-from PyQt4 import QtGui, QtCore, QtSql
+from PyQt4 import QtGui, QtCore, QtSql, uic
 from FolderModel import *
+from FolderProperties import *
+from FileProperties import *
 DBFolderIDRole = QtCore.Qt.UserRole
- 
+
 class FolderView(QtGui.QDialog):
     def __init__(self, UserID, parent):
         QtGui.QDialog.__init__(self)
@@ -11,15 +13,18 @@ class FolderView(QtGui.QDialog):
         self.UserID = UserID
         self.parent = parent
         self.folder = 0
+        self.copy = None
         
         self.model = FolderModel()
         self.model.setQuery(self.execQuery())
         
-        view = QtGui.QListView(self)
-        view.setModel(self.model)
-        view.setSpacing(10)
-        view.setViewMode(QtGui.QListView.IconMode)
-        view.doubleClicked.connect(self.doubleClicked)
+        self.View = QtGui.QListView(self)
+        self.View.setModel(self.model)
+        self.View.setSpacing(10)
+        self.View.setViewMode(QtGui.QListView.IconMode)
+        self.View.doubleClicked.connect(self.doubleClicked)
+        self.View.customContextMenuRequested.connect(self.AddFileContextMenu)
+        self.View.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         
         self.history = QtGui.QListWidget()
         self.history.setFlow(QtGui.QListView.LeftToRight)
@@ -50,7 +55,7 @@ class FolderView(QtGui.QDialog):
         
         box = QtGui.QVBoxLayout()
         box.addWidget(self.history)
-        box.addWidget(view)
+        box.addWidget(self.View)
         main.addLayout(box)
         
         self.myComment = QtGui.QLineEdit(self)
@@ -90,17 +95,17 @@ class FolderView(QtGui.QDialog):
                 left join FileExtensions on Files.ExtensionID=FileExtensions.ExtensionID\
                 left join Ratings on Ratings.FileID=Files.FileID\
                 where NodeFiles.NodeID=?;")
-            query.bindValue(0, self.UserID);
-            query.bindValue(1, self.folder);
-            query.bindValue(2, self.folder);
+            query.bindValue(0, self.UserID)
+            query.bindValue(1, self.folder)
+            query.bindValue(2, self.folder)
         else:
             query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
                 from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
                 where Nodes.UserID=? and Edges.ParentID is NULL")
-            query.bindValue(0, self.UserID);
+            query.bindValue(0, self.UserID)
         
         query.exec_()
-        return query;
+        return query
     
     def createComment(self):
         query = QtSql.QSqlQuery("INSERT INTO Comments(UserID, FileID, CommentText)\
@@ -118,7 +123,7 @@ class FolderView(QtGui.QDialog):
                                 left join Users on Comments.UserID=Users.UserID\
                                 where Comments.FileID=?;")
                                 
-        query.bindValue(0, self.FileID);
+        query.bindValue(0, self.FileID)
         query.exec_()
         return query
     
@@ -158,3 +163,21 @@ class FolderView(QtGui.QDialog):
             folder.setData(DBFolderIDRole,item[1])
             self.history.addItem(folder)
         self.history.setCurrentItem(self.history.item(self.history.count()-1))
+    
+    def AddFileContextMenu(self, point):
+        self.fileAddMenu = QtGui.QMenu()
+        self.fileAddMenu.addAction("Add folder", self.folderAdd)
+        self.fileAddMenu.addAction("Add file", self.fileAdd)
+        if len(self.View.selectedIndexes())>0:
+            self.fileAddMenu.addAction("Copy")
+        if self.copy!=None:
+            self.fileAddMenu.addAction("Paste")
+        self.fileAddMenu.popup(self.pos() + point)
+    
+    def folderAdd(self):
+        self.FP = FolderProperties(self, self.folder, self.UserID)
+        self.FP.open()
+    
+    def fileAdd(self):
+        self.FP = FileProperties(self, self.folder)
+        self.FP.open()

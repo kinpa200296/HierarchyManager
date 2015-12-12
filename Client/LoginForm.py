@@ -1,17 +1,37 @@
 #!/usr/bin/python2.7
  
 import sys
-from PyQt4 import QtGui, QtCore, QtSql
+from PyQt4 import QtGui, QtCore, QtSql, uic
 from FolderView import *
 from DbConfig import DbConfig
 
- 
+class RegisterForm(QtGui.QDialog):
+    def __init__(self, parent):
+        QtGui.QDialog.__init__(self, parent)
+        self.ui = uic.loadUi("RegisterForm.ui", self)
+        self.connect(self.ui.acceptButton, QtCore.SIGNAL("clicked()"), self.accept)
+        self.connect(self.ui.declineButton, QtCore.SIGNAL("clicked()"), self.close)
+    
+    def accept(self):
+        if (self.ui.passwordEdit.text()==self.ui.passwordEdit_2.text()):
+            query = QtSql.QSqlQuery("INSERT INTO Users(LoginWord, PassPhrase, FirstName, LastName, RootNodeID)\
+                                    VALUES (?, ?, ?, ?, NULL);")
+            query.bindValue(0, self.ui.usernameEdit.text())
+            query.bindValue(1, self.ui.passwordEdit.text())
+            query.bindValue(2, self.ui.nameEdit.text())
+            query.bindValue(3, self.ui.surnameEdit.text())
+            query.exec_()
+            self.close()
+        else:
+            QtGui.QMessageBox.critical(self, "Error", "Passwords does not match!")
+        
 class LoginForm(QtGui.QDialog):
     def __init__(self):
         QtGui.QDialog.__init__(self)
+        self.ui = uic.loadUi("LoginForm.ui", self)
         
-        self.setWindowTitle("Hierarchy Manager")
-
+        self.connect(self.ui.enterButton, QtCore.SIGNAL("clicked()"), self.tryToLogin)
+        self.connect(self.ui.registerButton, QtCore.SIGNAL("clicked()"), self.register)
         db = QtSql.QSqlDatabase.addDatabase("QMYSQL")
         config = DbConfig()
         config.load()
@@ -20,30 +40,11 @@ class LoginForm(QtGui.QDialog):
         
         if not ok:
             QtGui.QMessageBox.critical(self, "Error", "Database not connected. You will not be able to log in.")
-
-        login = QtGui.QLabel("Login")
-        password = QtGui.QLabel("Password")
-        self.loginEdit = QtGui.QLineEdit(self)
-        self.passwordEdit = QtGui.QLineEdit(self)
-        self.passwordEdit.setEchoMode(QtGui.QLineEdit.Password)
-        button = QtGui.QPushButton("Enter")
-        self.connect(button, QtCore.SIGNAL("clicked()"), self.tryToLogin)
-        
-        self.loginEdit.setText("user")
-        self.passwordEdit.setText("qwerty")
-        
-        grid = QtGui.QGridLayout()
-        grid.setSpacing(10)
-        
-        grid.addWidget(login,1,0)
-        grid.addWidget(self.loginEdit,1,1)
-        grid.addWidget(password,2,0)
-        grid.addWidget(self.passwordEdit,2,1)
-        grid.addWidget(button,3,1)
-        
-        self.setLayout(grid)
-        self.resize(120, 80)
-        
+    
+    def register(self):
+        self.register = RegisterForm(self)
+        self.register.open()
+    
     def tryToLogin(self):
         query = QtSql.QSqlQuery("SELECT UserId from users where LoginWord=? and PassPhrase=?")
         query.bindValue(0, self.loginEdit.text())
