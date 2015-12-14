@@ -6,6 +6,9 @@ from FolderProperties import *
 from FileProperties import *
 DBFolderIDRole = QtCore.Qt.UserRole
 
+class obj(object):
+    pass
+
 class FolderView(QtGui.QDialog):
     def __init__(self, UserID, parent):
         QtGui.QDialog.__init__(self)
@@ -169,9 +172,9 @@ class FolderView(QtGui.QDialog):
         self.fileAddMenu.addAction("Add folder", self.folderAdd)
         self.fileAddMenu.addAction("Add file", self.fileAdd)
         if len(self.View.selectedIndexes())>0:
-            self.fileAddMenu.addAction("Copy")
+            self.fileAddMenu.addAction("Copy", self.objCopy)
         if self.copy!=None:
-            self.fileAddMenu.addAction("Paste")
+            self.fileAddMenu.addAction("Paste", self.objPaste)
         self.fileAddMenu.popup(self.pos() + point)
     
     def folderAdd(self):
@@ -181,3 +184,26 @@ class FolderView(QtGui.QDialog):
     def fileAdd(self):
         self.FP = FileProperties(self, self.folder)
         self.FP.open()
+        
+    def objCopy(self):
+        self.copy = obj
+        self.copy.Type = self.model.record(self.View.selectedIndexes()[0].row()).value(0).toInt()[0]
+        self.copy.ID = self.model.record(self.View.selectedIndexes()[0].row()).value(1).toInt()[0]
+    
+    def objPaste(self):
+        if self.copy!=None:
+            if self.copy.Type == 1:
+                query = QtSql.QSqlQuery("INSERT INTO Edges(ChildID, ParentID, UserID)\
+                                        VALUES (?, ?, ?);")
+                query.bindValue(0, self.copy.ID)
+                query.bindValue(1, self.folder)
+                query.bindValue(2, self.UserID)
+                query.exec_()
+            else:
+                query = QtSql.QSqlQuery("INSERT INTO NodeFiles(NodeID, FileID)\
+                                        VALUES (?, ?);")
+                query.bindValue(0, self.folder)
+                query.bindValue(1, self.copy.ID)
+                query.exec_()
+        
+        self.model.setQuery(self.execQuery())
