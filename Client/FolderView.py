@@ -6,11 +6,16 @@ from FolderProperties import *
 from FileProperties import *
 DBFolderIDRole = QtCore.Qt.UserRole
 
+class obj(object):
+    pass
+
 class FolderView(QtGui.QDialog):
-    def __init__(self, UserID, parent):
+    def __init__(self, parent, UserID, sharedOnly = False, otherUser = 0):
         QtGui.QDialog.__init__(self)
         self.setWindowTitle("Hierarchy Manager")
+        self.Other = otherUser
         self.UserID = UserID
+        self.sharedOnly = sharedOnly
         self.parent = parent
         self.folder = 0
         self.copy = None
@@ -82,27 +87,57 @@ class FolderView(QtGui.QDialog):
         
     def execQuery(self):
         if self.folder>0:
-            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name,\
-                NULL as Icon, NULL as Rating, IsShared\
-                from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
-                where Nodes.UserID=? and Edges.ParentID=?\
-                \
-                union\
-                \
-                select 2 as Type, Files.FileID as ID, Files.Name as Name,\
-                FileExtensions.Icon as Icon, Ratings.Value as Rating, Files.IsShared\
-                from Files left join NodeFiles on NodeFiles.FileID=Files.FileID\
-                left join FileExtensions on Files.ExtensionID=FileExtensions.ExtensionID\
-                left join Ratings on Ratings.FileID=Files.FileID\
-                where NodeFiles.NodeID=?;")
-            query.bindValue(0, self.UserID)
+            if self.sharedOnly:
+                query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name,\
+                    NULL as Icon, NULL as Rating, IsShared\
+                    from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
+                    where Nodes.UserID=? and Edges.ParentID=? and IsShared=1\
+                    \
+                    union\
+                    \
+                    select 2 as Type, Files.FileID as ID, Files.Name as Name,\
+                    FileExtensions.Icon as Icon, Ratings.Value as Rating, Files.IsShared\
+                    from Files left join NodeFiles on NodeFiles.FileID=Files.FileID\
+                    left join FileExtensions on Files.ExtensionID=FileExtensions.ExtensionID\
+                    left join Ratings on Ratings.FileID=Files.FileID\
+                    where NodeFiles.NodeID=? and IsShared=1;")
+                query.bindValue(0, self.Other)
+            else:
+                query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name,\
+                    NULL as Icon, NULL as Rating, IsShared\
+                    from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
+                    where Nodes.UserID=? and Edges.ParentID=?\
+                    \
+                    union\
+                    \
+                    select 2 as Type, Files.FileID as ID, Files.Name as Name,\
+                    FileExtensions.Icon as Icon, Ratings.Value as Rating, Files.IsShared\
+                    from Files left join NodeFiles on NodeFiles.FileID=Files.FileID\
+                    left join FileExtensions on Files.ExtensionID=FileExtensions.ExtensionID\
+                    left join Ratings on Ratings.FileID=Files.FileID\
+                    where NodeFiles.NodeID=?;")
+                query.bindValue(0, self.UserID)
             query.bindValue(1, self.folder)
             query.bindValue(2, self.folder)
         else:
-            query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
-                from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
-                where Nodes.UserID=? and Edges.ParentID is NULL")
-            query.bindValue(0, self.UserID)
+            if self.sharedOnly:
+                query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
+                    from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
+                    where Nodes.UserID=? and Edges.ParentID is NULL and IsShared=1;")
+                query.bindValue(0, self.Other)
+            else:
+                query = QtSql.QSqlQuery("select 1 as Type, NodeID as ID, NodeName as Name\
+                    from Nodes left join Edges on Nodes.NodeID=Edges.ChildID\
+                    where Nodes.UserID=? and Edges.ParentID is NULL\
+                    \
+                    union\
+                    \
+                    select 0 as Type, UserID as ID, LoginWord as Name\
+                    from Users\
+                    where UserID in (select userID from nodes where IsShared=1 group by UserID having count(*)>0) and\
+                    UserID<>?;")
+                query.bindValue(0, self.UserID)
+                query.bindValue(1, self.UserID)
         
         query.exec_()
         return query
@@ -137,7 +172,10 @@ class FolderView(QtGui.QDialog):
     
     def doubleClicked(self, index):
         self.frame.setVisible(False)
-        if self.model.record(index.row()).value(0).toInt()[0]==1:
+        if self.model.record(index.row()).value(0).toInt()[0]==0:
+            self.otherView = FolderView(self, self.UserID, True, self.model.record(index.row()).value(1).toInt()[0])
+            self.otherView.open()
+        elif self.model.record(index.row()).value(0).toInt()[0]==1:
             self.folder = self.model.record(index.row()).value(1).toInt()[0]
             folder = QtGui.QListWidgetItem(self.model.record(index.row()).value(2).toString()+" >")
             folder.setData(DBFolderIDRole,self.folder)
@@ -169,9 +207,9 @@ class FolderView(QtGui.QDialog):
         self.fileAddMenu.addAction("Add folder", self.folderAdd)
         self.fileAddMenu.addAction("Add file", self.fileAdd)
         if len(self.View.selectedIndexes())>0:
-            self.fileAddMenu.addAction("Copy")
+            self.fileAddMenu.addAction("Copy", self.objCopy)
         if self.copy!=None:
-            self.fileAddMenu.addAction("Paste")
+            self.fileAddMenu.addAction("Paste", self.objPaste)
         self.fileAddMenu.popup(self.pos() + point)
     
     def folderAdd(self):
@@ -181,3 +219,26 @@ class FolderView(QtGui.QDialog):
     def fileAdd(self):
         self.FP = FileProperties(self, self.folder)
         self.FP.open()
+        
+    def objCopy(self):
+        self.copy = obj
+        self.copy.Type = self.model.record(self.View.selectedIndexes()[0].row()).value(0).toInt()[0]
+        self.copy.ID = self.model.record(self.View.selectedIndexes()[0].row()).value(1).toInt()[0]
+    
+    def objPaste(self):
+        if self.copy!=None:
+            if self.copy.Type == 1:
+                query = QtSql.QSqlQuery("INSERT INTO Edges(ChildID, ParentID, UserID)\
+                                        VALUES (?, ?, ?);")
+                query.bindValue(0, self.copy.ID)
+                query.bindValue(1, self.folder)
+                query.bindValue(2, self.UserID)
+                query.exec_()
+            else:
+                query = QtSql.QSqlQuery("INSERT INTO NodeFiles(NodeID, FileID)\
+                                        VALUES (?, ?);")
+                query.bindValue(0, self.folder)
+                query.bindValue(1, self.copy.ID)
+                query.exec_()
+        
+        self.model.setQuery(self.execQuery())

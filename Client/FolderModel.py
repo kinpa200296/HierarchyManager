@@ -10,7 +10,9 @@ class FolderModel(QtSql.QSqlQueryModel):
             return self.record(index.row()).value(2).toString()
         elif index.isValid() and role==QtCore.Qt.DecorationRole:
             type = self.record(index.row()).value(0).toInt()[0]
-            if type==1:
+            if type==0:
+                icon = QtGui.QIcon("user.png")
+            elif type==1:
                 icon = QtGui.QIcon("folder.png")
             else:
                 s = self.record(index.row()).value(3).toString()
