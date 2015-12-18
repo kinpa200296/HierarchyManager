@@ -55,7 +55,7 @@ class LoginForm(QtGui.QDialog):
         if result:
             if query.size()>0:
                 query.first() 
-                self.view = FolderView(query.value(0).toInt()[0], self)
+                self.view = FolderView(self, query.value(0).toInt()[0])
                 self.view.show()
                 self.hide()
             else:
