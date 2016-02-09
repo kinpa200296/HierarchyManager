@@ -6,17 +6,13 @@ SIZE 100M REUSE AUTOEXTEND ON NEXT 10M MAXSIZE 200M;
 ------------------------------------------------------------------Users
 CREATE TABLE Users
 (
-	UserID		NUMBER PRIMARY KEY,
-	LoginWord	VARCHAR2(20),
-	PassPhrase	VARCHAR2(20),
+	UserID		NUMBER PRIMARY KEY NOT NULL,
+	LoginWord	VARCHAR2(20) NOT NULL,
+	PassPhrase	VARCHAR2(20) NOT NULL,
 	FirstName	VARCHAR2(20),
 	LastName	VARCHAR2(20)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table Users modify (UserID NOT NULL enable);
-alter table Users modify (LoginWord NOT NULL enable);
-alter table Users modify (PassPhrase NOT NULL enable);
 
 create sequence Users_SEQ minvalue 1 maxvalue 100000 increment by 1 start with 1 nocycle;
 
@@ -24,7 +20,7 @@ create or replace trigger Users_TRG
 before insert on Users
 for each row
 begin
-  if :NEW.NodeID is null then
+  if :NEW.UserID is null then
     select Users_SEQ.nextval into :NEW.UserID from SYS.DUAL;
   end if;
 end Users_TRG;
@@ -36,18 +32,13 @@ alter trigger Users_TRG enable;
 ------------------------------------------------------------------Nodes
 CREATE TABLE Nodes
 (
-	NodeID		NUMBER PRIMARY KEY,
-	NodeName	VARCHAR2(20),
-	UserID		NUMBER,
-	IsShared	NUMBER,
+	NodeID		NUMBER PRIMARY KEY NOT NULL,
+	NodeName	VARCHAR2(20) NOT NULL,
+	UserID		NUMBER NOT NULL,
+	IsShared	NUMBER NOT NULL,
     CONSTRAINT NodeUser_FK FOREIGN KEY (UserID) REFERENCES Users(UserID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table Nodes modify (NodeID NOT NULL enable);
-alter table Nodes modify (NodeName NOT NULL enable);
-alter table Nodes modify (UserID NOT NULL enable);
-alter table Nodes modify (IsShared NOT NULL enable);
 
 create sequence Nodes_SEQ minvalue 1 maxvalue 100000000 increment by 1 start with 1 nocycle;
 
@@ -65,20 +56,15 @@ alter trigger Nodes_TRG enable;
 ------------------------------------------------------------------Edges
 CREATE TABLE Edges
 (
-	EdgeID		NUMBER PRIMARY KEY,
-	ChildID		NUMBER,
-	ParentID	NUMBER,
-	UserID		NUMBER,
+	EdgeID		NUMBER PRIMARY KEY NOT NULL,
+	ChildID		NUMBER NOT NULL,
+	ParentID	NUMBER NOT NULL,
+	UserID		NUMBER NOT NULL,
 	CONSTRAINT ChildNode_FK FOREIGN KEY (ChildID) REFERENCES Nodes(NodeID),
 	CONSTRAINT ParentNode_FK FOREIGN KEY (ParentID) REFERENCES Nodes(NodeID),
 	CONSTRAINT UserEdge_FK FOREIGN KEY (UserID) REFERENCES Users(UserID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table Edges modify (EdgeID NOT NULL enable);
-alter table Edges modify (ChildID NOT NULL enable);
-alter table Edges modify (ParentID NOT NULL enable);
-alter table Edges modify (UserID NOT NULL enable);
 
 create sequence Edges_SEQ minvalue 1 maxvalue 100000000 increment by 1 start with 1 nocycle;
 
@@ -96,33 +82,24 @@ alter trigger Edges_TRG enable;
 ------------------------------------------------------------NodeActions
 create table NodeActions
 (
-  NodeActionID NUMBER PRIMARY KEY,
-  NodeActionName VARCHAR2(20)
+  NodeActionID NUMBER PRIMARY KEY NOT NULL,
+  NodeActionName VARCHAR2(20) NOT NULL
 )
 tablespace HIERARCHYMANAGER;
-
-alter table NodeActions modify (NodeActionID NOT NULL enable);
-alter table NodeActions modify (NodeActionName NOT NULL enable);
 
 ---------------------------------------------------------------NodesLog
 CREATE TABLE NodesLog
 (
-	NodesLogID		NUMBER PRIMARY KEY,
-	NodeActionID	NUMBER,
-	NodeID			NUMBER,
-	UserID			NUMBER,
-	ActionTimeStamp	DATE,
+	NodesLogID		NUMBER PRIMARY KEY NOT NULL,
+	NodeActionID	NUMBER NOT NULL,
+	NodeID			NUMBER NOT NULL,
+	UserID			NUMBER NOT NULL,
+	ActionTimeStamp	DATE NOT NULL,
 	CONSTRAINT NodeAction_FK FOREIGN KEY (NodeActionID) REFERENCES NodeActions(NodeActionID),
 	CONSTRAINT NodeLog_FK FOREIGN KEY (NodeID) REFERENCES Nodes(NodeID),
 	CONSTRAINT UserNodeLog_FK FOREIGN KEY (UserID) REFERENCES Users(UserID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table NodesLog modify (NodesLogID NOT NULL enable);
-alter table NodesLog modify (NodeActionID NOT NULL enable);
-alter table NodesLog modify (NodeID NOT NULL enable);
-alter table NodesLog modify (UserID NOT NULL enable);
-alter table NodesLog modify (ActionTimeStamp NOT NULL enable);
 
 create sequence NodesLog_SEQ minvalue 1 maxvalue 10000000000 increment by 1 start with 1 nocycle;
 
@@ -142,16 +119,12 @@ alter trigger NodesLog_TRG enable;
 ---------------------------------------------------------FileExtensions
 CREATE TABLE FileExtensions
 (
-	ExtensionID	NUMBER PRIMARY KEY,
-	Mask		VARCHAR2(12),
-	Extension	VARCHAR2(80),
+	ExtensionID	NUMBER PRIMARY KEY NOT NULL,
+	Mask		VARCHAR2(12) NOT NULL,
+	Description	VARCHAR2(80) NOT NULL,
     Icon        VARCHAR2(20)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table FileExtensions modify (ExtensionID NOT NULL enable);
-alter table FileExtensions modify (Mask NOT NULL enable);
-alter table FileExtensions modify (Extension NOT NULL enable);
 
 create sequence FileExt_SEQ minvalue 1 maxvalue 100000 increment by 1 start with 1 nocycle;
 
@@ -169,18 +142,14 @@ alter trigger FileExt_TRG enable;
 ------------------------------------------------------------------Files
 CREATE TABLE Files
 (
-	FileID		NUMBER PRIMARY KEY,
-	Name		VARCHAR2(20),
+	FileID		NUMBER PRIMARY KEY NOT NULL,
+	Name		VARCHAR2(20) NOT NULL,
 	ExtensionID NUMBER,
 	FileData	BLOB,
-	IsShared	NUMBER,
+	IsShared	NUMBER NOT NULL,
 	CONSTRAINT Extension_FK FOREIGN KEY (ExtensionID) REFERENCES FileExtensions(ExtensionID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table Files modify (FileID NOT NULL enable);
-alter table Files modify (Name NOT NULL enable);
-alter table Files modify (IsShared NOT NULL enable);
 
 create sequence Files_SEQ minvalue 1 maxvalue 100000000 increment by 1 start with 1 nocycle;
 
@@ -198,47 +167,35 @@ alter trigger Files_TRG enable;
 --------------------------------------------------------------NodeFiles
 CREATE TABLE NodeFiles
 (
-	NodeID	NUMBER,
-	FileID	NUMBER,
+	NodeID	NUMBER NOT NULL,
+	FileID	NUMBER NOT NULL,
 	PRIMARY KEY (NodeID, FileID),
 	CONSTRAINT Node_FK FOREIGN KEY (NodeID) REFERENCES Nodes(NodeID),
 	CONSTRAINT File_FK FOREIGN KEY (FileID) REFERENCES Files(FileID)
 )
 tablespace HIERARCHYMANAGER;
 
-alter table NodeFiles modify (NodeID NOT NULL enable);
-alter table NodeFiles modify (FileID NOT NULL enable);
-
 ------------------------------------------------------------FileActions
 create table FileActions
 (
-  FileActionID NUMBER PRIMARY KEY,
-  FileActionName VARCHAR2(20)
+  FileActionID NUMBER PRIMARY KEY NOT NULL,
+  FileActionName VARCHAR2(20) NOT NULL
 )
 tablespace HIERARCHYMANAGER;
-
-alter table FileActions modify (FileActionID NOT NULL enable);
-alter table FileActions modify (FileActionName NOT NULL enable);
 
 ---------------------------------------------------------------FilesLog
 CREATE TABLE FilesLog
 (
-	FilesLogID		NUMBER PRIMARY KEY,
-	FileActionID	NUMBER,
-	FileID			NUMBER,
-	UserID			NUMBER,
-	ActionTimeStamp	DATE,
+	FilesLogID		NUMBER PRIMARY KEY NOT NULL,
+	FileActionID	NUMBER NOT NULL,
+	FileID			NUMBER NOT NULL,
+	UserID			NUMBER NOT NULL,
+	ActionTimeStamp	DATE NOT NULL,
 	CONSTRAINT FileAction_FK FOREIGN KEY (FileActionID) REFERENCES FileActions(FileActionID),
 	CONSTRAINT FileLog_FK FOREIGN KEY (FileID) REFERENCES Files(FileID),
 	CONSTRAINT UserFileLog_FK FOREIGN KEY (UserID) REFERENCES Users(UserID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table FilesLog modify (FilesLogID NOT NULL enable);
-alter table FilesLog modify (FileActionID NOT NULL enable);
-alter table FilesLog modify (FileID NOT NULL enable);
-alter table FilesLog modify (UserID NOT NULL enable);
-alter table FilesLog modify (ActionTimeStamp NOT NULL enable);
 
 create sequence FilesLog_SEQ minvalue 1 maxvalue 10000000000 increment by 1 start with 1 nocycle;
 
@@ -259,35 +216,26 @@ alter trigger FilesLog_TRG enable;
 
 CREATE TABLE Ratings
 (
-	UserID	NUMBER,
-	FileID	NUMBER,
-	Value	NUMBER,
+	UserID	NUMBER NOT NULL,
+	FileID	NUMBER NOT NULL,
+	Value	NUMBER NOT NULL,
 	PRIMARY KEY (UserID, FileID),
 	CONSTRAINT UserRating_FK FOREIGN KEY (UserID) REFERENCES Users(UserID),
 	CONSTRAINT FileRating_FK FOREIGN KEY (FileID) REFERENCES Files(FileID)
 )
 tablespace HIERARCHYMANAGER;
 
-alter table Ratings modify (UserID NOT NULL enable);
-alter table Ratings modify (FileID NOT NULL enable);
-alter table Ratings modify (Value NOT NULL enable);
-
 ---------------------------------------------------------------Comments
 CREATE TABLE Comments
 (
-	CommentID	NUMBER PRIMARY KEY,
-	UserID		NUMBER,
-	FileID		NUMBER,
-	CommentText	VARCHAR2(800),
+	CommentID	NUMBER PRIMARY KEY NOT NULL,
+	UserID		NUMBER NOT NULL,
+	FileID		NUMBER NOT NULL,
+	CommentText	VARCHAR2(800) NOT NULL,
 	CONSTRAINT UserComment_FK FOREIGN KEY (UserID) REFERENCES Users(UserID),
 	CONSTRAINT FileComment_FK FOREIGN KEY (FileID) REFERENCES Files(FileID)
 )
 tablespace HIERARCHYMANAGER;
-
-alter table Comments modify (CommentID NOT NULL enable);
-alter table Comments modify (UserID NOT NULL enable);
-alter table Comments modify (FileID NOT NULL enable);
-alter table Comments modify (CommentText NOT NULL enable);
 
 create sequence Comments_SEQ minvalue 1 maxvalue 10000000000 increment by 1 start with 1 nocycle;
 
