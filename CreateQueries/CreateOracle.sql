@@ -25,7 +25,6 @@ begin
   end if;
 end Users_TRG;
 /
-alter trigger Users_TRG enable;
 
 -----------------------------------------------------------------------
 --------------------   Folder operations section   --------------------
@@ -51,7 +50,6 @@ begin
   end if;
 end Nodes_TRG;
 /
-alter trigger Nodes_TRG enable;
 
 ------------------------------------------------------------------Edges
 CREATE TABLE Edges
@@ -77,7 +75,6 @@ begin
   end if;
 end Edges_TRG;
 /
-alter trigger Edges_TRG enable;
 
 ------------------------------------------------------------NodeActions
 create table NodeActions
@@ -112,7 +109,6 @@ begin
   end if;
 end NodesLog_TRG;
 /
-alter trigger NodesLog_TRG enable;
 
 -----------------------------------------------------------------------
 ---------------------   File operations section   ---------------------
@@ -137,7 +133,6 @@ begin
   end if;
 end FileExt_TRG;
 /
-alter trigger FileExt_TRG enable;
 
 ------------------------------------------------------------------Files
 CREATE TABLE Files
@@ -162,7 +157,6 @@ begin
   end if;
 end Files_TRG;
 /
-alter trigger Files_TRG enable;
 
 --------------------------------------------------------------NodeFiles
 CREATE TABLE NodeFiles
@@ -208,7 +202,6 @@ begin
   end if;
 end FilesLog_TRG;
 /
-alter trigger FilesLog_TRG enable;
 
 -----------------------------------------------------------------------
 -------------------   Extended operations section   -------------------
@@ -248,4 +241,3 @@ begin
   end if;
 end Comments_TRG;
 /
-alter trigger FilesLog_TRG enable;
