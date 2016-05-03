@@ -32,14 +32,20 @@ class LoginForm(QtGui.QDialog):
         
         self.connect(self.ui.enterButton, QtCore.SIGNAL("clicked()"), self.tryToLogin)
         self.connect(self.ui.registerButton, QtCore.SIGNAL("clicked()"), self.register)
-        db = QtSql.QSqlDatabase.addDatabase("QMYSQL")
+        # db = QtSql.QSqlDatabase.addDatabase("QOCI")
         config = DbConfig()
         config.load()
-        config.config(db)
-        ok = db.open()
-        
-        if not ok:
-            QtGui.QMessageBox.critical(self, "Error", "Database not connected. You will not be able to log in.")
+        db = config.connect()
+
+        print dir(db)
+        print db.version
+
+        c = db.cursor()
+        res = c.execute("SELECT * from FileExtensions")
+        print res
+        print c.description
+        #if not ok:
+           # QtGui.QMessageBox.critical(self, "Error", "Database not connected. You will not be able to log in.")
     
     def register(self):
         self.register = RegisterForm(self)

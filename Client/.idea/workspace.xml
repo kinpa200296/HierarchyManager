@@ -14,7 +14,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Client$LoginForm.coverage" NAME="LoginForm Coverage Results" MODIFIED="1449910746048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Client$LoginForm.coverage" NAME="LoginForm Coverage Results" MODIFIED="1462232732609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -25,13 +25,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginForm.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginForm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LoginForm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.45888594">
+              <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
               <folding>
-                <marker date="1449906778461" expanded="true" signature="1442:1501" placeholder="SELECT UserI..users..." />
+                <element signature="e#23#33#0" expanded="true" />
+                <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+                <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+                <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
               </folding>
             </state>
           </provider>
@@ -41,35 +44,45 @@
         <entry file="file://$PROJECT_DIR$/DbConfig.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
+              <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FolderModel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FolderModel.py">
+      <file leaf-file-name="config.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FolderView.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FolderView.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FolderView.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="211" column="16" selection-start-line="211" selection-start-column="16" selection-end-line="211" selection-end-column="16" />
               <folding>
-                <element signature="e#22#60#0" expanded="true" />
-                <marker date="1449907419849" expanded="true" signature="2745:2983" placeholder="select 1 as ..Nodes..." />
-                <marker date="1449907419849" expanded="true" signature="2745:3482" placeholder="select 1 as ..." />
-                <marker date="1449907419849" expanded="true" signature="3060:3482" placeholder="select 2 as ..Files..." />
-                <marker date="1449907419849" expanded="true" signature="3672:3859" placeholder="select 1 as ..Nodes..." />
-                <marker date="1449907419849" expanded="true" signature="4027:4126" placeholder="INSERT INTO Comments..." />
-                <marker date="1449907419849" expanded="true" signature="4452:4701" placeholder="select Comme..Comments..." />
+                <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+                <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+                <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+                <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+                <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+                <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+                <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+                <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+                <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+                <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+                <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+                <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+                <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+                <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+                <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
               </folding>
             </state>
           </provider>
@@ -88,9 +101,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/LoadDbConfig.py" />
-        <option value="$PROJECT_DIR$/LoginForm.py" />
-        <option value="$PROJECT_DIR$/DbConfig.py" />
+        <option value="$PROJECT_DIR$/FolderView.py" />
         <option value="$PROJECT_DIR$/config.json" />
+        <option value="$PROJECT_DIR$/DbConfig.py" />
+        <option value="$PROJECT_DIR$/LoginForm.py" />
       </list>
     </option>
   </component>
@@ -131,7 +145,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -152,12 +165,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/Python/27/python.exe" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Python.LoginForm">
@@ -382,6 +396,9 @@
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ec312982-db99-4416-83e1-63567f44a0c1" name="Default" comment="" />
@@ -392,16 +409,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2579425" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2730711" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -415,12 +432,20 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -428,51 +453,12 @@
     <entry file="file://$PROJECT_DIR$/LoginForm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
           <folding>
-            <marker date="1449906778461" expanded="true" signature="1442:1501" placeholder="SELECT UserI..users..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DbConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Python/2.7.10/Lib/json/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38348082">
-          <caret line="335" column="0" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="130" selection-start-line="0" selection-start-column="130" selection-end-line="0" selection-end-column="130" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LoginForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-          <folding>
-            <marker date="1449906778461" expanded="true" signature="1442:1501" placeholder="SELECT UserI..users..." />
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
           </folding>
         </state>
       </provider>
@@ -481,7 +467,252 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="65" selection-start-line="30" selection-start-column="61" selection-end-line="30" selection-end-column="65" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -498,13 +729,138 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#22#60#0" expanded="true" />
-            <marker date="1449907419849" expanded="true" signature="2745:2983" placeholder="select 1 as ..Nodes..." />
-            <marker date="1449907419849" expanded="true" signature="2745:3482" placeholder="select 1 as ..." />
-            <marker date="1449907419849" expanded="true" signature="3060:3482" placeholder="select 2 as ..Files..." />
-            <marker date="1449907419849" expanded="true" signature="3672:3859" placeholder="select 1 as ..Nodes..." />
-            <marker date="1449907419849" expanded="true" signature="4027:4126" placeholder="INSERT INTO Comments..." />
-            <marker date="1449907419849" expanded="true" signature="4452:4701" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Python/2.7.10/Lib/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38348082">
+          <caret line="335" column="0" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileProperties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.092057765">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="11" />
+          <folding>
+            <marker date="1449941184169" expanded="true" signature="627:676" placeholder="select Exten..FileExtensions..." />
+            <marker date="1449941184169" expanded="true" signature="1180:1300" placeholder="INSERT INTO Files..." />
+            <marker date="1449941184169" expanded="true" signature="1733:1784" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.087478556">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FolderView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="211" column="16" selection-start-line="211" selection-start-column="16" selection-end-line="211" selection-end-column="16" />
+          <folding>
+            <marker date="1450508265769" expanded="true" signature="3178:3443" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="3178:3993" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="3536:3993" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4353" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="4103:4888" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="4446:4888" placeholder="select 2 as ..Files..." />
+            <marker date="1450508265769" expanded="true" signature="5115:5325" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5630" placeholder="select 1 as ..Nodes..." />
+            <marker date="1450508265769" expanded="true" signature="5435:5954" placeholder="select 1 as ..." />
+            <marker date="1450508265769" expanded="true" signature="5723:5954" placeholder="select 0 as ..Users..." />
+            <marker date="1450508265769" expanded="true" signature="5843:5918" placeholder="select userI..nodes..." />
+            <marker date="1450508265769" expanded="true" signature="6173:6272" placeholder="INSERT INTO Comments..." />
+            <marker date="1450508265769" expanded="true" signature="6598:6847" placeholder="select Comme..Comments..." />
+            <marker date="1450508265769" expanded="true" signature="10279:10381" placeholder="INSERT INTO Edges..." />
+            <marker date="1450508265769" expanded="true" signature="10619:10711" placeholder="INSERT INTO NodeFiles..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LoginForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45888594">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding>
+            <element signature="e#23#33#0" expanded="true" />
+            <marker date="1462232730521" expanded="true" signature="605:741" placeholder="INSERT INTO Users..." />
+            <marker date="1462232730521" expanded="true" signature="1697:1725" placeholder="SELECT * fro..FileExtensions..." />
+            <marker date="1462232730521" expanded="true" signature="2073:2132" placeholder="SELECT UserI..users..." />
           </folding>
         </state>
       </provider>
